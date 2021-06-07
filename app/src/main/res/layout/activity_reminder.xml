@@ -6,9 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".Reminder"
     android:orientation="vertical">
-
-
-
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="409dp"
@@ -72,7 +69,7 @@
                     android:fontFamily="monospace"
                     android:paddingLeft="10dp"
                     android:paddingTop="5dp"
-                    android:text="提醒事项一"
+                    android:text="任务一"
                     android:textColor="@color/black"
                     android:textSize="17dp" />
 
@@ -85,7 +82,7 @@
                     android:paddingLeft="15dp"
                     android:paddingTop="2dp"
                     android:paddingBottom="2dp"
-                    android:text="提醒事项一"
+                    android:text="任务一"
                     android:textColor="#D3D3D3"
                     android:textSize="12dp" />
 
@@ -96,15 +93,15 @@
 
     <TextView
         android:id="@+id/Add"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="305dp"
+        android:layout_height="241dp"
         android:drawableLeft="@drawable/add"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
         android:paddingTop="5dp"
         android:paddingBottom="20dp"
-        android:text="新提醒事项"
+        android:text="新建计划"
         android:textColor="#4169E1"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
