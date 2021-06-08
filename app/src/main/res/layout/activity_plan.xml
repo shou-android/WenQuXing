@@ -22,7 +22,7 @@
         android:ellipsize="marquee"
         android:gravity="center_horizontal|center"
         android:singleLine="true"
-        android:text="计划"
+        android:text="任务"
         android:textColor="@android:color/black"
         android:textSize="20dp" />
 

@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -58,9 +60,17 @@ public class NewEvent extends AppCompatActivity {
 
         Submit = findViewById(R.id.SubmitEvent);
         Content = findViewById(R.id.NewContent);
+        ImageView fan1=(ImageView)findViewById(R.id.iv_backward);
 
         initCheckedChange();
         initOnClick();
+        fan1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(NewEvent.this,Reminder.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void initOnClick(){
@@ -116,6 +126,7 @@ public class NewEvent extends AppCompatActivity {
                 }
             }
         });
+
     }
 
 }
