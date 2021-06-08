@@ -4,8 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".Reminder"
     android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/ReminderTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="计划表"
+        android:textColor="#4169E1"
+        android:textSize="25dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.02" />
+
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="409dp"
@@ -16,91 +32,44 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="0.07">
 
         <TextView
             android:id="@+id/Edit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_gravity="right"
             android:layout_marginRight="15dp"
             android:layout_weight="1"
-            android:textSize="17dp"
+            android:gravity="center"
+            android:text="编辑"
             android:textColor="#4169E1"
-            android:text="编辑" />
+            android:textSize="17dp" />
 
     </LinearLayout>
-
 
     <ScrollView
         android:id="@+id/events"
         android:layout_width="match_parent"
-        android:layout_height="659dp"
+        android:layout_height="604dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.677">
 
-        <LinearLayout
-            android:id="@+id/event"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="20dp" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/event1content"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="monospace"
-                    android:paddingLeft="10dp"
-                    android:paddingTop="5dp"
-                    android:text="任务一"
-                    android:textColor="@color/black"
-                    android:textSize="17dp" />
-
-                <TextView
-                    android:id="@+id/event1time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:fontFamily="monospace"
-                    android:paddingLeft="15dp"
-                    android:paddingTop="2dp"
-                    android:paddingBottom="2dp"
-                    android:text="任务一"
-                    android:textColor="#D3D3D3"
-                    android:textSize="12dp" />
-
-            </LinearLayout>
-
-        </LinearLayout>
     </ScrollView>
 
     <TextView
         android:id="@+id/Add"
-        android:layout_width="305dp"
-        android:layout_height="241dp"
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
         android:drawableLeft="@drawable/add"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:paddingTop="5dp"
-        android:paddingBottom="20dp"
         android:text="新建计划"
         android:textColor="#4169E1"
         android:textSize="17dp"
