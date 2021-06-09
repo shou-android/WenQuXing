@@ -20,6 +20,7 @@ import android.widget.TimePicker;
 
 import com.example.wenquxing.SQL.DatabaseOpenHelper;
 import com.example.wenquxing.Utils.EventInfoGetterAndSetter;
+import com.example.wenquxing.javabean.Event;
 
 import org.w3c.dom.Text;
 
@@ -47,6 +48,9 @@ public class NewEvent extends AppCompatActivity {
     private Integer PickedHour;
     private Integer PickedMinute;
 
+    private int isNewEvent;
+    private boolean isBeenModified = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,8 +66,12 @@ public class NewEvent extends AppCompatActivity {
         Content = findViewById(R.id.NewContent);
         ImageView fan1=(ImageView)findViewById(R.id.iv_backward);
 
+        isNewEvent = getIntent().getIntExtra("IsNewEvent", 1);
+
         initCheckedChange();
         initOnClick();
+        initContent();
+
         fan1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -73,14 +81,27 @@ public class NewEvent extends AppCompatActivity {
         });
     }
 
+    private void initContent(){
+        if(isNewEvent == 1){
+            return;
+        }
+        Content.setText(getIntent().getStringExtra("Content"));
+    }
+
     private void initOnClick(){
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DatabaseOpenHelper helper = new DatabaseOpenHelper(NewEvent.this, "EventDatabase", null, 1);
                 java.util.Date date = new Date();
-                calendar.set(PickedYear, PickedMonth - 1, PickedDay);
-                EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), calendar.getTime());
+                if(isNewEvent == 1 || isBeenModified){
+                    calendar.set(PickedYear, PickedMonth - 1, PickedDay, PickedHour, PickedDay);
+                    EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), calendar.getTime());
+                } else {
+                    //TODO:从数据库中获取时间
+
+                    EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), new Date());
+                }
                 finish();
             }
         });
@@ -95,13 +116,18 @@ public class NewEvent extends AppCompatActivity {
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            isBeenModified = true;
                             PickedMinute = minute;
                             PickedHour = hourOfDay;
                             Time.setText(PickedHour + ":" + PickedMinute);
                         }
                     }, 0, 0, false).show();
                 } else {
-                    Time.setText("时间");
+                    if(isNewEvent == 0){
+                        Time.setText("选择新时间");
+                    } else {
+                        Time.setText("时间");
+                    }
                 }
             }
         });
@@ -114,6 +140,7 @@ public class NewEvent extends AppCompatActivity {
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            isBeenModified = true;
                             PickedYear = year;
                             PickedDay = dayOfMonth;
                             PickedMonth = month + 1;
@@ -122,7 +149,11 @@ public class NewEvent extends AppCompatActivity {
                         }
                     }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
                 } else {
-                    Date.setText("日期");
+                    if(isNewEvent == 0){
+                        Date.setText("日期");
+                    } else {
+                        Date.setText("选择新日期");
+                    }
                 }
             }
         });

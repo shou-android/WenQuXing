@@ -25,6 +25,7 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.TimeZone;
 
 public class Reminder extends AppCompatActivity {
 
@@ -33,6 +34,10 @@ public class Reminder extends AppCompatActivity {
     private ScrollView scrollView;
     private TextView EditAndConfirm;
     private TextView Add;
+
+    private Integer GlobalCount;
+
+    private final Integer ContentIDBase = 1000;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +58,43 @@ public class Reminder extends AppCompatActivity {
         initEvents();
     }
 
+    private ArrayList<TextView> GetEventObject(){
+        ArrayList<TextView> ret = new ArrayList<>();
+        for(int i = 1; i <= GlobalCount; i++){
+            ret.add(findViewById(ContentIDBase + i));
+        }
+        return ret;
+    }
+
     private void initClick(){
         //TODO:实现编辑和确认之间的切换
         EditAndConfirm = findViewById(R.id.Edit);
         EditAndConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ArrayList<TextView> textViewArrayList = GetEventObject();
+                if(EditAndConfirm.getText().toString().equals("编辑")){
+                    EditAndConfirm.setText("确认");
+                    for(TextView Content : textViewArrayList){
+                        System.out.println("绑定点击事件");
+                        Content.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                //跳转到内容编辑界面
+                                Intent intent = new Intent(Reminder.this, NewEvent.class);
+                                intent.putExtra("IsNewEvent", 0);
+                                intent.putExtra("Content", Content.getText().toString());
+                                startActivity(intent);
+                            }
+                        });
+                    }
+                } else {
+                    EditAndConfirm.setText("编辑");
+                    for(TextView Content : textViewArrayList){
+                        //在非编辑状态取消监听器
+                        Content.setOnClickListener(null);
+                    }
+                }
             }
         });
 
@@ -69,6 +104,7 @@ public class Reminder extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Reminder.this, NewEvent.class);
+                intent.putExtra("isNewEvent", 1);
                 startActivity(intent);
             }
         });
@@ -77,6 +113,8 @@ public class Reminder extends AppCompatActivity {
 
     @SuppressLint("ResourceType")
     private void initEvents(){
+        int Offest = 1;
+        int Count = 1;
         scrollView = findViewById(R.id.events);
         LinearLayout.LayoutParams AllEventsParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         LinearLayout AllEvents = new LinearLayout(scrollView.getContext());
@@ -108,6 +146,7 @@ public class Reminder extends AppCompatActivity {
             //内容
             LinearLayout.LayoutParams ContentLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             TextView Content = new TextView(InsideLayout.getContext());
+            Content.setId(ContentIDBase + Offest);
             Content.setText(event.getEventContent());
             Content.setTextSize(17);
             Content.setTextColor(R.color.black);
@@ -117,7 +156,7 @@ public class Reminder extends AppCompatActivity {
             //时间
             LinearLayout.LayoutParams TimeLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             TextView Time = new TextView(InsideLayout.getContext());
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+            @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
             Time.setText(format.format(event.getTime()));
             Time.setTextSize(12);
             Time.setTextColor(Color.parseColor("#D3D3D3"));
@@ -130,15 +169,20 @@ public class Reminder extends AppCompatActivity {
             EventLayout.addView(InsideLayout);
             AllEvents.addView(EventLayout);
 
+            Offest++;
+            Count++;
+
             //绑定确认事件
             button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     EventLayout.setVisibility(View.GONE);
-                    //TODO:删除数据库中的内容
+                    //删除数据库中的内容
+                    EventInfoGetterAndSetter.DeleteEvent(helper, event.getID());
                 }
             });
         }
+        GlobalCount = Count - 1;
 
         scrollView.addView(AllEvents);
     }

@@ -43,4 +43,8 @@ public class EventInfoGetterAndSetter {
         values.put("Time", Time.getTime());
         helper.getWritableDatabase().insert("Event", "Time", values);
     }
+
+    public static void DeleteEvent(DatabaseOpenHelper helper, Integer ID){
+        helper.getWritableDatabase().delete("Event", "EventID=?", new String[]{String.valueOf(ID)});
+    }
 }
