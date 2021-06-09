@@ -1,5 +1,4 @@
 package com.example.wenquxing;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,9 +7,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 public class login extends Activity {
-    private final String zhanghao="wqx";
+    private String zhanghao="wqx";
     private String mima="12345";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,7 +17,7 @@ public class login extends Activity {
         final EditText username=(EditText)findViewById(R.id.et_number);
         final EditText password=(EditText)findViewById(R.id.et_password);
         Button login=(Button)findViewById(R.id.btn_login);
-        Button zhece=(Button)findViewById(R.id.btn_zhuce);
+        Button zhuce=(Button)findViewById(R.id.btn_zhuce);
         final SharedPreferences sp=getSharedPreferences("login",MODE_PRIVATE);
         String usernam1=sp.getString("user",null);
         String password1=sp.getString("pass",null);
@@ -41,7 +39,7 @@ public class login extends Activity {
                         editor.commit();
                         Intent intent=new Intent(login.this, zhu.class);
                         startActivity(intent);
-                        Toast.makeText(login.this,"已保存密码",Toast.LENGTH_LONG).show();
+                        Toast.makeText(login.this,"登录成功",Toast.LENGTH_LONG).show();
                     }
                     else {
                         Toast.makeText(login.this,"账号密码错误",Toast.LENGTH_SHORT).show();
@@ -49,7 +47,7 @@ public class login extends Activity {
                 }
             });
         }
-        zhece.setOnClickListener(new View.OnClickListener() {
+        zhuce.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(login.this, zhuce.class);
