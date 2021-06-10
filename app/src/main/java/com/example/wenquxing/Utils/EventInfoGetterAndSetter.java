@@ -23,7 +23,12 @@ public class EventInfoGetterAndSetter {
             String content = event.getString(event.getColumnIndex("Content"));
             long Time = event.getLong(event.getColumnIndex("Time"));
             int id = event.getInt(event.getColumnIndex("EventID"));
-            ret.add(new Event(content, new Date(Time), id));
+            if(Time != -1){
+                ret.add(new Event(content, new Date(Time), id));
+            } else {
+                ret.add(new Event(content, null, id));
+            }
+
         }
         return ret;
     }
@@ -40,7 +45,11 @@ public class EventInfoGetterAndSetter {
         ContentValues values = new ContentValues();
         values.put("EventID", InsertID);
         values.put("Content", EventContent);
-        values.put("Time", Time.getTime());
+        if(Time == null){
+            values.put("Time", -1);
+        } else {
+            values.put("Time", Time.getTime());
+        }
         helper.getWritableDatabase().insert("Event", "Time", values);
     }
 

@@ -46,6 +46,8 @@ public class NewEvent extends AppCompatActivity {
 
     private int isNewEvent;
     private boolean isBeenModified = false;
+    private boolean HasTime = false;
+    private boolean HasDate = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,18 +92,36 @@ public class NewEvent extends AppCompatActivity {
             public void onClick(View v) {
                 Integer ID = getIntent().getIntExtra("EventID", 1000);
                 DatabaseOpenHelper helper = new DatabaseOpenHelper(NewEvent.this, "EventDatabase", null, 1);
-                Date date = new Date();
                 if(isNewEvent == 1){
                     //新事件
-                    calendar.set(PickedYear, PickedMonth - 1, PickedDay, PickedHour, PickedDay);
-                    EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), calendar.getTime());
+                    if(HasTime && HasDate){
+                        //包含时间和日期
+                        calendar.set(PickedYear, PickedMonth - 1, PickedDay, PickedHour, PickedMinute);
+                        EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), calendar.getTime());
+                    } else if(HasTime){
+                        //仅包含时间
+                        calendar.set(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH), PickedHour, PickedMinute);
+                        EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), calendar.getTime());
+                    } else if(HasDate) {
+                        //仅包含日期
+                        calendar.set(PickedYear, PickedMonth - 1, PickedDay, calendar.get(Calendar.HOUR) + 8, calendar.get(Calendar.MINUTE));
+                        EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), calendar.getTime());
+                    } else {
+                        //没有时间
+                        EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), null);
+                    }
                 } else if(isBeenModified){
-                    //旧时间以及修改Content内容
-                    calendar.set(PickedYear, PickedMonth - 1, PickedDay, PickedHour, PickedDay);
+                    //新时间以及修改Content内容
+                    calendar.set(PickedYear, PickedMonth - 1, PickedDay, PickedHour, PickedMinute);
                     EventInfoGetterAndSetter.UpdateEvent(helper, ID, Content.getText().toString(), calendar.getTime());
                 } else {
+                    //旧时间
                     long Time = getIntent().getLongExtra("Time", calendar.getTimeInMillis());
-                    EventInfoGetterAndSetter.UpdateEvent(helper, ID, Content.getText().toString(), new Date(Time));
+                    if(Time == -1){
+                        EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), null);
+                    } else {
+                        EventInfoGetterAndSetter.UpdateEvent(helper, ID, Content.getText().toString(), new Date(Time));
+                    }
                 }
                 finish();
             }
@@ -117,6 +137,7 @@ public class NewEvent extends AppCompatActivity {
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                            HasTime = true;
                             isBeenModified = true;
                             PickedMinute = minute;
                             PickedHour = hourOfDay;
@@ -141,6 +162,7 @@ public class NewEvent extends AppCompatActivity {
                         @SuppressLint("SetTextI18n")
                         @Override
                         public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                            HasDate = true;
                             isBeenModified = true;
                             PickedYear = year;
                             PickedDay = dayOfMonth;

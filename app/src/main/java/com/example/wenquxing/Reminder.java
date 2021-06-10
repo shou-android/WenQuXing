@@ -91,7 +91,7 @@ public class Reminder extends AppCompatActivity {
                     EditAndConfirm.setText("确认");
                     for(LinearLayout InsideLayout : textViewArrayList){
                         String Content = null;
-                        long Time = Calendar.getInstance().getTimeInMillis();
+                        long Time = -1;
                         for(int i = 0; i < InsideLayout.getChildCount(); i++){
                             TextView textView = (TextView) InsideLayout.getChildAt(i);
                             String str = textView.getText().toString();
@@ -188,17 +188,21 @@ public class Reminder extends AppCompatActivity {
             Content.setLayoutParams(ContentLayoutParams);
 
             //时间
-            LinearLayout.LayoutParams TimeLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             TextView Time = new TextView(InsideLayout.getContext());
-            @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-            Time.setText(format.format(event.getTime()));
-            Time.setTextSize(12);
-            Time.setTextColor(Color.parseColor("#D3D3D3"));
-            Time.setPadding(50, 4, 0, 4);
-            Time.setLayoutParams(TimeLayoutParams);
+            if(event.getTime() != null){
+                LinearLayout.LayoutParams TimeLayoutParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Time.setText(format.format(event.getTime()));
+                Time.setTextSize(12);
+                Time.setTextColor(Color.parseColor("#D3D3D3"));
+                Time.setPadding(50, 4, 0, 4);
+                Time.setLayoutParams(TimeLayoutParams);
+            }
 
             InsideLayout.addView(Content);
-            InsideLayout.addView(Time);
+            if(event.getTime() != null){
+                InsideLayout.addView(Time);
+            }
             EventLayout.addView(button);
             EventLayout.addView(InsideLayout);
             AllEvents.addView(EventLayout);
