@@ -25,6 +25,7 @@ import org.w3c.dom.Text;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -154,6 +155,7 @@ public class Reminder extends AppCompatActivity {
 
         //从数据库中获取提醒事项信息并动态生成
         ArrayList<Event> events = EventInfoGetterAndSetter.GetAllEvent(helper);
+        Collections.sort(events);
         for(Event event : events){
             Integer EventID = event.getID();
             IDs.add(EventID);

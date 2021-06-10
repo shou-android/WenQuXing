@@ -35,6 +35,8 @@ public class NewEvent extends AppCompatActivity {
     private TextView Date;
     private TextView Time;
 
+    private ImageView Return;
+
     final Calendar calendar = Calendar.getInstance();
 
     private Integer PickedYear = null;
@@ -62,7 +64,7 @@ public class NewEvent extends AppCompatActivity {
 
         Submit = findViewById(R.id.SubmitEvent);
         Content = findViewById(R.id.NewContent);
-        ImageView fan1=(ImageView)findViewById(R.id.iv_backward);
+        Return = findViewById(R.id.iv_backward);
 
         isNewEvent = getIntent().getIntExtra("IsNewEvent", 1);
 
@@ -70,13 +72,7 @@ public class NewEvent extends AppCompatActivity {
         initOnClick();
         initContent();
 
-        fan1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(NewEvent.this,Reminder.class);
-                startActivity(intent);
-            }
-        });
+
     }
 
     private void initContent(){
@@ -124,6 +120,14 @@ public class NewEvent extends AppCompatActivity {
                     }
                 }
                 finish();
+            }
+        });
+
+        Return.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(NewEvent.this,Reminder.class);
+                startActivity(intent);
             }
         });
     }
