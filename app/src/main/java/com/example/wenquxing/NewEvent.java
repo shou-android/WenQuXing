@@ -13,16 +13,12 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.RadioGroup;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.example.wenquxing.SQL.DatabaseOpenHelper;
 import com.example.wenquxing.Utils.EventInfoGetterAndSetter;
-import com.example.wenquxing.javabean.Event;
-
-import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -92,15 +88,20 @@ public class NewEvent extends AppCompatActivity {
         Submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Integer ID = getIntent().getIntExtra("EventID", 1000);
                 DatabaseOpenHelper helper = new DatabaseOpenHelper(NewEvent.this, "EventDatabase", null, 1);
-                java.util.Date date = new Date();
-                if(isNewEvent == 1 || isBeenModified){
+                Date date = new Date();
+                if(isNewEvent == 1){
+                    //新事件
                     calendar.set(PickedYear, PickedMonth - 1, PickedDay, PickedHour, PickedDay);
                     EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), calendar.getTime());
+                } else if(isBeenModified){
+                    //旧时间以及修改Content内容
+                    calendar.set(PickedYear, PickedMonth - 1, PickedDay, PickedHour, PickedDay);
+                    EventInfoGetterAndSetter.UpdateEvent(helper, ID, Content.getText().toString(), calendar.getTime());
                 } else {
-                    //TODO:从数据库中获取时间
-
-                    EventInfoGetterAndSetter.SetEvent(helper, Content.getText().toString(), new Date());
+                    long Time = getIntent().getLongExtra("Time", calendar.getTimeInMillis());
+                    EventInfoGetterAndSetter.UpdateEvent(helper, ID, Content.getText().toString(), new Date(Time));
                 }
                 finish();
             }

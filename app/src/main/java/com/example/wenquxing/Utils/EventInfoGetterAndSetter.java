@@ -47,4 +47,9 @@ public class EventInfoGetterAndSetter {
     public static void DeleteEvent(DatabaseOpenHelper helper, Integer ID){
         helper.getWritableDatabase().delete("Event", "EventID=?", new String[]{String.valueOf(ID)});
     }
+
+    public static void UpdateEvent(DatabaseOpenHelper helper, Integer ID, String EventContent, Date Time){
+        DeleteEvent(helper, ID);
+        SetEvent(helper, EventContent, Time);
+    }
 }
