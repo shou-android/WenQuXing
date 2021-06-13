@@ -6,13 +6,14 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".Reminder"
+    android:background="#F0FFFF"
     android:orientation="vertical">
 
     <TextView
         android:id="@+id/ReminderTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="计划表"
+        android:text="任务表"
         android:textColor="#4169E1"
         android:textSize="25dp"
         android:textStyle="bold"
@@ -51,7 +52,7 @@
     <ScrollView
         android:id="@+id/events"
         android:layout_width="match_parent"
-        android:layout_height="604dp"
+        android:layout_height="600dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -70,11 +71,11 @@
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
         android:paddingLeft="20dp"
-        android:text="新建计划"
+        android:text="新建任务"
         android:textColor="#4169E1"
         android:textSize="17dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

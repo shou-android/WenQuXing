@@ -23,7 +23,7 @@ import com.example.wenquxing.Utils.EventInfoGetterAndSetter;
 import java.util.Calendar;
 import java.util.Date;
 
-@SuppressLint("UseSwitchCompatOrMaterialCode")
+
 public class NewEvent extends AppCompatActivity {
 
     private Switch UseTime;
