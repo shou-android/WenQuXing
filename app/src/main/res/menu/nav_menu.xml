@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_friend"
+            android:icon="@mipmap/ic_calendar"
+            android:title="学习日历" />
+        <item
+            android:id="@+id/item_wallet"
+            android:icon="@drawable/icon_wallet"
+            android:title="课程表" />
+        <item
+            android:id="@+id/item_location"
+            android:icon="@drawable/icon_location"
+            android:title="位置" />
+        <item
+            android:id="@+id/item_phone"
+            android:icon="@drawable/icon_phone"
+            android:title="电话" />
+        <item
+            android:id="@+id/item_email"
+            android:icon="@drawable/icon_email"
+            android:title="邮箱" />
+        <!--增加扩展菜单-->
+        <item android:title="扩展">
+            <menu>
+                <item
+                    android:id="@+id/item_share"
+                    android:icon="@drawable/icon_share"
+                    android:title="分享" />
+                <item
+                    android:id="@+id/item_send"
+                    android:icon="@drawable/icon_send"
+                    android:title="发送" />
+            </menu>
+        </item>
+
+    </group>
+</menu>

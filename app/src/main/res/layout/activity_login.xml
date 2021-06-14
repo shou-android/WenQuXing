@@ -1,10 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@mipmap/b2"
-
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:background="@mipmap/b2"
+    tools:context=".ai.Login.Login" >
 
     <include
         android:id="@+id/main_title"
@@ -59,7 +58,7 @@
             android:visibility="gone" />
 
         <TextView
-            android:id="@+id/btn_login"
+            android:id="@+id/main_btn_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/input_layout"
@@ -71,23 +70,7 @@
             android:paddingTop="2dip"
             android:paddingRight="15dip"
             android:paddingBottom="2dip"
-            android:text=" Login "
-            android:textColor="#ffffff"
-            android:textSize="20sp" />
-        <TextView
-            android:id="@+id/btn_zhuce"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_login"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="30dip"
-            android:background="@drawable/text_bg"
-            android:gravity="center"
-            android:paddingLeft="15dip"
-            android:paddingTop="3dip"
-            android:paddingRight="15dip"
-            android:paddingBottom="2dip"
-            android:text="register"
+            android:text="Login"
             android:textColor="#ffffff"
             android:textSize="20sp" />
     </RelativeLayout>
@@ -97,4 +80,5 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true" />
+
 </RelativeLayout>
