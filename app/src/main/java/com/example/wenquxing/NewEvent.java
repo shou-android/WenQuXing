@@ -17,6 +17,7 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
+import com.example.wenquxing.R;
 import com.example.wenquxing.SQL.DatabaseOpenHelper;
 import com.example.wenquxing.Utils.EventInfoGetterAndSetter;
 

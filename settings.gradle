@@ -1,2 +1,3 @@
 rootProject.name = "WenQuXing"
 include ':app'
+include ':superview'

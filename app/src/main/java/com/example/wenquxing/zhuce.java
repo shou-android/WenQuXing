@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.wenquxing.ai.Login.Login;
+
 public class zhuce extends Activity {
 
     @Override
@@ -26,7 +28,7 @@ public class zhuce extends Activity {
                 String in_password=pass.getText().toString();
                 if(in_username.equals("wqx")&&in_password.equals("12345"))
                 {
-                    Intent intent=new Intent(zhuce.this,login.class);
+                    Intent intent=new Intent(zhuce.this, Login.class);
                     startActivity(intent);
                     Toast.makeText(zhuce.this,"注册成功",Toast.LENGTH_LONG).show();
                 }
@@ -35,7 +37,7 @@ public class zhuce extends Activity {
         fanhui.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent=new Intent(zhuce.this,login.class);
+                Intent intent=new Intent(zhuce.this,Login.class);
                 startActivity(intent);
             }
         });
