@@ -75,7 +75,7 @@
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerInside"
                 android:src="@mipmap/ic_calendar"
-                android:tint="#000000" />
+                app:tint="#000000" />
 
             <TextView
                 android:id="@+id/tv_current_day"
@@ -110,7 +110,7 @@
             app:day_text_size="14sp"
             app:max_year="2020"
             app:min_year="2004"
-            app:month_view="com.ai.ai.progress.ProgressMonthView"
+            app:month_view="com.example.wenquxing.ai.ProgressMonthView"
             app:month_view_show_mode="mode_fix"
             app:other_month_lunar_text_color="#e1e1e1"
             app:other_month_text_color="#e1e1e1"
@@ -122,7 +122,7 @@
             app:selected_theme_color="#FFf54a00"
             app:week_background="#fff"
             app:week_text_color="#111111"
-            app:week_view="com.ai.ai.progress.ProgressWeekView"
+            app:week_view="com.example.wenquxing.ai.ProgressWeekView"
             app:year_view_day_text_color="#333333"
             app:year_view_day_text_size="9sp"
             app:year_view_month_text_color="#ff0000"
@@ -131,7 +131,7 @@
 
         </com.ai.superview.CalendarView>
 
-        <com.ai.ai.group.GroupRecyclerView
+        <com.example.wenquxing.ai.group.GroupRecyclerView
             android:id="@+id/recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

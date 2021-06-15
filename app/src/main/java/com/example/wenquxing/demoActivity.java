@@ -32,6 +32,19 @@ public class demoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demo);
         Button ReminderTest = findViewById(R.id.ReminderTest);
         Button work = findViewById(R.id.work);
+        drawerLayout = findViewById(R.id.drawer_layout);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        //工具栏按钮点击
+        toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
+        ///-------------
+        navView = findViewById(R.id.nav_view);
+        //获取头部视图
+        View headerView = navView.getHeaderView(0);
+        //头像点击
+        headerView.findViewById(R.id.iv_avatar).setOnClickListener(v -> showMsg("头像"));
+        /*****/
+        //导航菜单点击
         ReminderTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,19 +59,6 @@ public class demoActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        drawerLayout = findViewById(R.id.drawer_layout);
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        //工具栏按钮点击
-        toolbar.setNavigationOnClickListener(v -> drawerLayout.openDrawer(GravityCompat.START));
-        ///-------------
-        navView = findViewById(R.id.nav_view);
-        //获取头部视图
-        View headerView = navView.getHeaderView(0);
-        //头像点击
-        headerView.findViewById(R.id.iv_avatar).setOnClickListener(v -> showMsg("头像"));
-        /*****/
-        //导航菜单点击
         navView.setNavigationItemSelectedListener(item -> {
             switch (item.getItemId()) {
                 case R.id.item_friend:
