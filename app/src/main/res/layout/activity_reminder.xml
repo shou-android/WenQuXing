@@ -30,10 +30,10 @@
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.07">
+        app:layout_constraintTop_toBottomOf="@+id/ReminderTitle"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/Edit"
@@ -57,8 +57,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.677">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.0">
 
 
     </ScrollView>
@@ -67,6 +67,7 @@
         android:id="@+id/Add"
         android:layout_width="match_parent"
         android:layout_height="42dp"
+        android:layout_marginTop="2dp"
         android:drawableLeft="@drawable/add"
         android:drawablePadding="10dp"
         android:gravity="center_vertical"
@@ -74,11 +75,10 @@
         android:text="新建任务"
         android:textColor="#4169E1"
         android:textSize="17dp"
-        app:layout_constraintBottom_toBottomOf="parent"
 
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/events"
         app:layout_constraintVertical_bias="1.0" />
 
 
